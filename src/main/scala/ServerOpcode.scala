@@ -59,8 +59,7 @@ object ServerOpcode {
       case "Welcome" => parseWelcome(params)
       case "React"   => parseReact(params)
       case "GoodBye" => parseGoodBye(params)
-      case _ => throw new IllegalStateException(
-          "ServerOpcode.parse input: " + input)
+      case _ => None
     }
   }
 }

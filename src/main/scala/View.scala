@@ -1,16 +1,3 @@
-/* 
-    "?" cell whose content is occluded by a wall
-    "_" empty cell
-    "W" wall
-    "M" Bot (=master; yours, always in the center unless seen by a slave)
-    "m" Bot (=master; enemy, not you)
-    "S" Mini-bot (=slave, yours)
-    "s" Mini-bot (=slave; enemy's, not yours)
-    "P" Zugar (=good plant, food)
-    "p" Toxifera (=bad plant, poisonous)
-    "B" Fluppet (=good beast, food)
-    "b" Snorg (=bad beast, predator)
-*/
 
 /*
 object View {

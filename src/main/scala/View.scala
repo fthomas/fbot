@@ -1,21 +1,21 @@
-
-/*
-object View {
-  val edibleEntities = List('P', 'B')
-  val friendlyEntities = List('M', 'S') ++ edibleEntities
-  val hostileEntities = friendlyEntities map (_.toLower)
+case class View(cells: String) {
+  val size: Int = math.sqrt(cells.length).toInt
   
-  def isFriendly(cell: Char): Boolean = friendlyEntities contains cell
-  def isHostile(cell: Char): Boolean = hostileEntities contains cell
+  def items = for (cell <- cells; item <- Item.from(cell)) yield item
+  def terrain = View(items map (_.terrain) toString)
   
-  def isZugar(cell: Char): Boolean = cell == 'P'
-  def isFluppet(cell: Char): Boolean = cell == 'B'
+  def apply(rel: Pos) = cells(indexFromRelPos(rel))
   
+  private val absCenter = Pos(size / 2, size / 2)
   
+  private def relPosFromAbsPos(abs: Pos) = (abs - absCenter).toPos
+  private def absPosFromRelPos(rel: Pos) = (rel + absCenter).toPos
   
-  def isTerrain(cell: Char): Boolean = List('?', '_', 'W') contains cell
-  def toTerrain(cell: Char): Char = if (isTerrain(cell)) cell else '_'
+  private def absPosFromIndex(index: Int) = Pos(index % size, index / size)
+  private def indexFromAbsPos(abs: Pos) = abs.x + abs.y * size
   
-  def terrain(view: String): String = view map toTerrain
+  private def relPosFromIndex(index: Int) =
+    relPosFromAbsPos(absPosFromIndex(index))
+  private def indexFromRelPos(rel: Pos) =
+    indexFromAbsPos(absPosFromRelPos(rel))
 }
-*/

@@ -1,4 +1,4 @@
-sealed class Item(val repr: Char) {
+sealed abstract class Item(val repr: Char) {
   def terrain: Char = repr
 }
 
@@ -11,11 +11,9 @@ object Item {
   def from(repr: Char): Option[Item] = allItemsMap get repr
 }
 
-case object Wall extends Item('W')
-
+case object Wall         extends Item('W')
 case object OccludedCell extends Item('?')
-
-case object EmptyCell extends Item('_')
+case object EmptyCell    extends Item('_')
 
 sealed abstract class Entity(repr: Char) extends Item(repr) {
   override val terrain: Char = '_'
@@ -34,9 +32,9 @@ object Entity {
     
   def from(repr: Char): Option[Entity] = allEntitiesMap get repr
                          
-  val edibleEntities = allEntities filter (_.isEdible)
+  val edibleEntities   = allEntities filter (_.isEdible)
   val friendlyEntities = allEntities filter (_.isFriendly)
-  val hostileEntities = allEntities filter (_.isHostile)
+  val hostileEntities  = allEntities filter (_.isHostile)
 }
 
 case object Master extends Entity('M') {

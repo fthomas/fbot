@@ -1,6 +1,8 @@
 object TestWS {
-//  val w = Welcome(Map("name"->"", "apocalypse"->"0", "round"->"0", "maxslaves" -> "0"))
-
+  val w = Welcome(Map("name"->"", "apocalypse"->"0", "round"->"0", "maxslaves" -> "0"))
+                                                  //> w  : Welcome = Welcome(name=,apocalypse=0,round=0,maxslaves=0)
+  w.params                                        //> res0: Map[String,String] = Map(name -> "", apocalypse -> 0, round -> 0, maxs
+                                                  //| laves -> 0)
  // GoodBye(Map("energy" -> "0"))
   
   /*

@@ -9,7 +9,7 @@ trait InputDispatching {
     opcodes.mkString("|")
   }
 
-  def respondToWelcome(welcome: Welcome): List[Opcode] = Nil
-  def respondToReact(react: React): List[Opcode] = Nil
-  def respondToGoodBye(goodbye: GoodBye): List[Opcode] = Nil
+  def respondToWelcome(welcome: Welcome): List[PluginOpcode] = Nil
+  def respondToReact(react: React): List[PluginOpcode] = Nil
+  def respondToGoodBye(goodbye: GoodBye): List[PluginOpcode] = Nil
 }

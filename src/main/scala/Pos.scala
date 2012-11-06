@@ -8,7 +8,7 @@ case class Pos(x: Int, y: Int) {
   def l1Dist(other: Pos): Int = (this - other).l1Length
   def l2Dist(other: Pos): Double = (this - other).l2Length
   def lInfDist(other: Pos): Int = (this - other).lInfLength
-  
+
   def toVec = Vec(x, y)
 }
 

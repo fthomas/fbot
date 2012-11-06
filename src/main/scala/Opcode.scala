@@ -24,6 +24,19 @@ case class GoodBye(val params: Map[String, String]) extends Opcode {
   val energy: Int = params("energy").toInt
 }
 
+/*
+case class Move extends Opcode
+case class Spawn extends Opcode
+case class Set extends Opcode
+case class Explode extends Opcode
+
+case class Say extends Opcode
+case class Status extends Opcode
+case class MarkCell extends Opcode
+case class DrawLine extends Opcode
+case class Log extends Opcode
+*/
+
 object Opcode {
   def parse(input: String): (String, Map[String, String]) = {  
     val tokens = input.split('(')

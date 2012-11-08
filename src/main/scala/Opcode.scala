@@ -12,7 +12,7 @@ case class Welcome(params: Map[String, String]) extends ServerOpcode {
   val name: String = params("name")
   val apocalypse: Int = params("apocalypse").toInt
   val round: Int = params("round").toInt
-  val maxslaves: Int = params("maxslaves").toInt
+  //val maxslaves: Int = params("maxslaves").toInt
 }
 
 case class React(params: Map[String, String]) extends ServerOpcode {
@@ -31,8 +31,20 @@ case class Move(direction: Vec) extends PluginOpcode {
   val params = Map("direction" -> direction.toString)
 }
 
-case class Spawn (params: Map[String, String]) extends PluginOpcode {
-  //
+case class Spawn(params: Map[String, String]) extends PluginOpcode {
+  val direction: Vec = Vec(params("direction"))
+  def name: String = params("name")
+  def energy: Int = params("energy").toInt
+
+  def this(direction: Vec) = {
+    this(Map("direction" -> direction.toString))
+  }
+
+  def this(direction: Vec, name: String, energy: Int) = {
+    this(Map("direction" -> direction.toString,
+             "name" -> name,
+             "energy" -> energy.toString))
+  }
 }
 
 case class Set(params: Map[String, String]) extends PluginOpcode {

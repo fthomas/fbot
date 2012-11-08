@@ -1,10 +1,24 @@
 case class View(cells: String) {
   val size: Int = math.sqrt(cells.length).toInt
 
-  def items = for (cell <- cells; item <- Item.from(cell)) yield item
-  def terrain = View(items map (_.terrain) toString)
+  val entities = for (cell <- cells; entity <- Entity.from(cell)) yield entity
+  def terrain = View(entities map (_.terrain) toString)
 
   def apply(rel: Pos) = cells(indexFromRelPos(rel))
+
+  def offsetToNearest(entity: Entity): Option[Vec] =
+    offsetToNearest(_ == entity)
+
+  def offsetToNearest(p: Entity => Boolean): Option[Vec] = {
+    val relativePositions =
+      entities.view
+              .zipWithIndex
+              .filter(x => p(x._1))
+              .map(x => relPosFromIndex(x._2).toVec)
+
+    if (relativePositions.isEmpty) None
+    else Some(relativePositions.minBy(_.lInfLength))
+  }
 
   private val absCenter = Pos(size / 2, size / 2)
 

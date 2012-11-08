@@ -1,13 +1,15 @@
 object TestWS {
-  val w = Welcome(Map("name"->"", "apocalypse"->"0", "round"->"0", "maxslaves" -> "0"))
-                                                  //> w  : Welcome = Welcome(name=,apocalypse=0,round=0,maxslaves=0)
-  w.params                                        //> res0: Map[String,String] = Map(name -> "", apocalypse -> 0, round -> 0, maxs
-                                                  //| laves -> 0)
+  //val w = Welcome(Map("name"->"", "apocalypse"->"0", "round"->"0", "maxslaves" -> "0"))
+  //w.params
+ 
+ // new Spawn(Vec(1,1))
+ 
  // GoodBye(Map("energy" -> "0"))
   
-  /*
- 	Entity.from('M').get
-	val s = Item.from('M').get match {
+  
+ 	Entity.from('B').get                      //> res0: Entity = Fluppet
+	
+	/*val s = Item.from('M').get match {
 		case _ => Slave
 	}
 	s.isFriendly

@@ -1,4 +1,10 @@
-trait InputDispatching {
+trait NoopResponding {
+  def respondToWelcome(welcome: Welcome): List[PluginOpcode] = Nil
+  def respondToReact(react: React): List[PluginOpcode] = Nil
+  def respondToGoodBye(goodbye: GoodBye): List[PluginOpcode] = Nil
+}
+
+trait InputDispatching extends NoopResponding {
   def respond(input: String): String = {
     val opcodes = Opcode.parseServerInput(input) match {
       case Some(w: Welcome) => respondToWelcome(w)
@@ -8,8 +14,4 @@ trait InputDispatching {
     }
     opcodes.mkString("|")
   }
-
-  def respondToWelcome(welcome: Welcome): List[PluginOpcode] = Nil
-  def respondToReact(react: React): List[PluginOpcode] = Nil
-  def respondToGoodBye(goodbye: GoodBye): List[PluginOpcode] = Nil
 }

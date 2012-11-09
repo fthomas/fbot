@@ -8,20 +8,20 @@ case class View(cells: String) {
 
   def apply(rel: Pos) = cells(indexFromRelPos(rel))
 
-  def offsetsToBy[B](pred: Entity => Boolean, sortFun: ((Vec, Entity)) => B)
-                    (implicit ord: Ordering[B]) = {
+  def offsetsToSortedBy[B](pred: Entity => Boolean,
+      sortFun: ((Vec, Entity)) => B)(implicit ord: Ordering[B]) = {
     offsets.filter(x => pred(x._2)).sortBy(sortFun)
   }
 
   def offsetToNearest(pred: Entity => Boolean): Option[Vec] = {
-    offsetsToBy(pred, _._1.lInfLength).headOption.map(_._1)
+    offsetsToSortedBy(pred, _._1.lInfLength).headOption.map(_._1)
   }
 
   def offsetToNearest(entity: Entity): Option[Vec] =
     offsetToNearest(_ == entity)
 
   def offsetToFarthest(pred: Entity => Boolean): Option[Vec] = {
-    offsetsToBy(pred, _._1.lInfLength).lastOption.map(_._1)
+    offsetsToSortedBy(pred, _._1.lInfLength).lastOption.map(_._1)
   }
 
   def offsetToFarthest(entity: Entity): Option[Vec] =

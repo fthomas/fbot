@@ -58,4 +58,18 @@ object Vec {
 
   val allDirections =
     List(up, upRight, right, downRight, down, downLeft, left, upLeft)
+
+  def rightOf(vec: Vec): Vec = vec.signum match {
+    case Vec( 0, y) => Vec(y, y)
+    case Vec(-1, y) => if (y > 0) Vec(0, y) else Vec(-1, y + 1)
+    case Vec( 1, y) => if (y < 0) Vec(0, y) else Vec( 1, y - 1)
+    case _ => Vec(0, 0)
+  }
+
+  def leftOf(vec: Vec): Vec = vec.signum match {
+    case Vec( 0, y) => Vec(-y, y)
+    case Vec(-1, y) => if (y < 0) Vec(0, y) else Vec(-1, y - 1)
+    case Vec( 1, y) => if (y > 0) Vec(0, y) else Vec( 1, y + 1)
+    case _ => Vec(0, 0)
+  }
 }

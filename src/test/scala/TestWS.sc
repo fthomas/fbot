@@ -1,13 +1,15 @@
 object TestWS {
+
+  Vec.leftOf(Vec.rightOf(Vec(-1,-1)))             //> res0: Vec = -1:-1
+
   val v = View("_W_" + "W_W" + "_W_")             //> v  : View = View(_W_W_W_W_)
-  v.freeDirections.length                         //> res0: Int = 4
-  v.freeDirections                                //> res1: List[Vec] = List(1:1, 1:-1, -1:-1, -1:1)
-  v(Pos(-1,0))                                    //> res2: Option[Entity] = Some(Wall)
-  !v.occupiedBy(Pos(1,0), Wall)                   //> res3: Boolean = false
+  v.freeDirections.length                         //> res1: Int = 4
+  v.freeDirections                                //> res2: List[Vec] = List(1:1, 1:-1, -1:-1, -1:1)
+  v(Pos(-1,0))                                    //> res3: Option[Entity] = Some(Wall)
+  !v.occupiedBy(Pos(1,0), Wall)                   //> res4: Boolean = false
 
   val cf = new ControlFunction                    //> cf  : ControlFunction = ControlFunction@539e6baa
-  cf.respond("React(view=_____WW,generation=0,name=0,time=0,energy=0)")
-                                                  //> res4: String = Move(direction=-1:1)
+  //cf.respond("React(view=_____WW,generation=0,name=0,time=0,energy=0)")
 
   Vec.allDirections                               //> res5: List[Vec] = List(0:1, 1:1, 1:0, 1:-1, 0:-1, -1:-1, -1:0, -1:1)
 

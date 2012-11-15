@@ -10,10 +10,13 @@ trait RandomWalking extends NoopResponding {
 trait NonStunningRandomWalking extends NoopResponding {
   override def respondToReact(react: React): List[PluginOpcode] = {
     val offsets = react.view.freeDirections
-    if (offsets.isEmpty) Nil
-    else {
-      val randOffset = offsets(Random.nextInt(offsets.length))
-      List(Move(randOffset))
+    val res = {
+      if (offsets.isEmpty) Nil
+      else {
+        val randOffset = offsets(Random.nextInt(offsets.length))
+        List(Move(randOffset))
+      }
     }
+    super.respondToReact(react) ++ res
   }
 }

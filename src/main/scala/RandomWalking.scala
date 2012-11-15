@@ -2,9 +2,18 @@ import scala.util.Random
 
 trait RandomWalking extends NoopResponding {
   override def respondToReact(react: React): List[PluginOpcode] = {
-    val res = List(Move(Vec(randCoord, randCoord)), Status("Random Walking"))
+    val res = List(Move(Vec.random()))
     super.respondToReact(react) ++ res
   }
+}
 
-  private def randCoord = Random.nextInt(4) - 2
+trait NonStunningRandomWalking extends NoopResponding {
+  override def respondToReact(react: React): List[PluginOpcode] = {
+    val offsets = react.view.freeDirections
+    if (offsets.isEmpty) Nil
+    else {
+      val randOffset = offsets(Random.nextInt(offsets.length))
+      List(Move(randOffset))
+    }
+  }
 }

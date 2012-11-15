@@ -6,7 +6,7 @@ case class View(cells: String) {
   lazy val offsets =
     entities.zipWithIndex.map(x => relPosFromIndex(x._2).toVec -> x._1)
 
-  def apply(rel: Pos) = cells(indexFromRelPos(rel))
+  def apply(rel: Pos) = Entity.from(cells(indexFromRelPos(rel)))
 
   def offsetsToSortedBy[B](pred: Entity => Boolean,
       sortFun: ((Vec, Entity)) => B)(implicit ord: Ordering[B]) = {
@@ -26,6 +26,11 @@ case class View(cells: String) {
 
   def offsetToFarthest(entity: Entity): Option[Vec] =
     offsetToFarthest(_ == entity)
+
+  def occupiedBy(rel: Pos, entity: Entity) = this(rel) == Some(entity)
+
+  def freeDirections: List[Vec] =
+    Vec.allDirections.filterNot(vec => occupiedBy(vec.toPos, Wall))
 
   def terrain = View(entities map (_.terrain) toString)
 

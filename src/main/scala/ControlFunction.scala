@@ -3,5 +3,5 @@ class ControlFunctionFactory {
 }
 
 class ControlFunction extends InputDispatching
-  with RandomWalking
-  with StupidHarvesting
+  with NonStunningRandomWalking
+  with NonStunningStupidHarvesting

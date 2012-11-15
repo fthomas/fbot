@@ -1,3 +1,5 @@
+import scala.util.Random
+
 case class Vec(x: Int, y: Int) {
   def +(that: Vec) = Vec(x + that.x, y + that.y)
   def -(that: Vec) = Vec(x - that.x, y - that.y)
@@ -39,6 +41,11 @@ object Vec {
     Vec(coords(0), coords(1))
   }
 
+  def random(dist: Int = 1): Vec = {
+    def rnd = Random.nextInt(dist*2 + 1) - dist
+    Vec(rnd, rnd)
+  }
+
   val up    = Vec( 0,  1)
   val down  = Vec( 0, -1)
   val right = Vec( 1,  0)
@@ -48,4 +55,7 @@ object Vec {
   val upLeft    = Vec(-1,  1)
   val downRight = Vec( 1, -1)
   val downLeft  = Vec(-1, -1)
+
+  val allDirections =
+    List(up, upRight, right, downRight, down, downLeft, left, upLeft)
 }

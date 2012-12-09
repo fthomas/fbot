@@ -2,8 +2,8 @@ import scala.util.Random
 
 trait RandomWalking extends NoopResponding {
   override def respondToReact(react: React): List[PluginOpcode] = {
-    val res = List(Move(Vec.random()))
-    super.respondToReact(react) ++ res
+    val randomMove = List(Move(Vec.random()))
+    super.respondToReact(react) ++ randomMove
   }
 }
 
@@ -20,3 +20,7 @@ trait NonStunningRandomWalking extends NoopResponding {
     super.respondToReact(react) ++ res
   }
 }
+
+// do not walk against walls
+// do not walk into toxic things, if there are other possibilities
+//
